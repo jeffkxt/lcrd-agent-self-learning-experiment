@@ -1,0 +1,13 @@
+﻿import re, html, pathlib
+src = pathlib.Path(r"C:/MyDocuments/Documents/LCRDTEST/tb_sources/arxiv_2601.11868.html").read_text(encoding="utf-8", errors="replace")
+src = re.sub(r"(?s)<script.*?</script>", " ", src)
+src = re.sub(r"(?s)<style.*?</style>", " ", src)
+src = re.sub(r"(?s)<sup[^>]*>.*?</sup>", " ", src)
+text = re.sub(r"<[^>]+>", "\n", src)
+text = html.unescape(text)
+text = re.sub(r"[ \t\u00a0]+", " ", text)
+text = re.sub(r"\n[ \t]+", "\n", text)
+text = re.sub(r"\n\s*\n+", "\n\n", text)
+out = pathlib.Path(r"C:/MyDocuments/Documents/LCRDTEST/tb_sources/arxiv_2601.11868.txt")
+out.write_text(text, encoding="utf-8")
+print(f"TEXT_OK bytes={len(text)} saved={out}")

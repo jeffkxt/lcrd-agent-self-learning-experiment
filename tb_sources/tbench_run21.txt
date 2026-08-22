@@ -1,0 +1,272 @@
+
+
+How to run Terminal-Bench 2.1
+
+terminal-bench
+
+terminal-bench
+
+Search
+
+⌘
+
+K
+
+run terminal-bench
+
+leaderboard
+
+benchmarks
+
+contributors
+
+news
+
+discord
+
+How to run Terminal-Bench 2.0
+
+How to run Terminal-Bench 2.1
+
+How to run Terminal-Bench Challenges
+
+How to run Terminal-Bench 2.1
+
+How to run Terminal-Bench 2.1
+
+Run Terminal-Bench 2.1 with Harbor.
+
+Terminal-Bench 2.1 is run through 
+Harbor
+ with the 
+terminal-bench/terminal-bench-2-1
+ dataset.
+
+Prerequisites
+
+Install Harbor and make sure Docker is running.
+
+uv
+
+pip
+
+uv
+
+ tool
+
+ install
+
+ harbor
+
+harbor
+
+ --help
+
+Smoke test
+
+Run the oracle solutions on the first five tasks. This confirms that Harbor can download the dataset and start the task containers.
+
+harbor
+
+ run
+
+ -d
+
+ terminal-bench/terminal-bench-2-1
+
+ -a
+
+ oracle
+
+ -l
+
+ 5
+
+Run with an agent
+
+harbor
+
+ run
+
+ \
+
+ -d
+
+ terminal-bench/terminal-bench-2-1
+
+ \
+
+ -a
+
+ claude-code
+
+ \
+
+ -m
+
+ anthropic/claude-opus-4-1
+
+ \
+
+ -k
+
+ 5
+
+To scale with a cloud sandbox, set the provider keys and pass 
+--env
+.
+
+export
+
+ DAYTONA_API_KEY
+
+=
+
+"<your-daytona-api-key>"
+
+export
+
+ ANTHROPIC_API_KEY
+
+=
+
+"<your-anthropic-api-key>"
+
+harbor
+
+ run
+
+ \
+
+ -d
+
+ terminal-bench/terminal-bench-2-1
+
+ \
+
+ -a
+
+ claude-code
+
+ \
+
+ -m
+
+ anthropic/claude-opus-4-1
+
+ \
+
+ --env
+
+ daytona
+
+ \
+
+ -n
+
+ 32
+
+ \
+
+ -k
+
+ 5
+
+Custom agents
+
+Pass an import path instead of a built-in agent name.
+
+harbor
+
+ run
+
+ \
+
+ -d
+
+ terminal-bench/terminal-bench-2-1
+
+ \
+
+ --agent-import-path
+
+ "path.to.agent:SomeAgent"
+
+ \
+
+ -k
+
+ 5
+
+To run one task from the dataset, add 
+--include-task-name
+.
+
+harbor
+
+ run
+
+ \
+
+ -d
+
+ terminal-bench/terminal-bench-2-1
+
+ \
+
+ -a
+
+ claude-code
+
+ \
+
+ -m
+
+ anthropic/claude-opus-4-1
+
+ \
+
+ --include-task-name
+
+ "<task-name>"
+
+Submit to the leaderboard
+
+Follow the submission instructions in the
+
+harbor-framework/terminal-bench-2-1
+
+repository.
+
+Results
+
+View the 
+Terminal-Bench 2.1 leaderboard
+, browse the 
+Terminal-Bench 2.1 benchmark
+, or open the 
+dataset on Harbor Hub
+.
+
+How to run Terminal-Bench 2.0
+
+Run Terminal-Bench 2.0 with Harbor.
+
+How to run Terminal-Bench Challenges
+
+Run or adapt long-horizon Terminal-Bench challenge tasks.
+
+On this page
+
+Prerequisites
+
+Smoke test
+
+Run with an agent
+
+Custom agents
+
+Submit to the leaderboard
+
+Results
+

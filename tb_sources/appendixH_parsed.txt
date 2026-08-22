@@ -1,0 +1,89 @@
+adaptive-rejection-sampler	Scientific Computing	Medium
+bn-fit-modify	Scientific Computing	Hard
+break-filter-js-from-html	Security	Medium
+build-cython-ext	Debugging	Medium
+build-pmars	Software Engineering	Medium
+build-pov-ray	Software Engineering	Medium
+caffe-cifar-10	Machine Learning	Medium
+cancel-async-tasks	Software Engineering	Hard
+chess-best-move	Games	Medium
+circuit-fibsqrt	Software Engineering	Hard
+cobol-modernization	Software Engineering	Easy
+code-from-image	Software Engineering	Medium
+compile-compcert	System Administration	Medium
+configure-git-webserver	System Administration	Hard
+constraints-scheduling	Personal Assistant	Medium
+count-dataset-tokens	Model Training	Medium
+crack-7z-hash	Security	Medium
+custom-memory-heap-crash	Debugging	Medium
+db-wal-recovery	File Operations	Medium
+distribution-search	Machine Learning	Medium
+dna-assembly	Scientific Computing	Hard
+dna-insert	Scientific Computing	Medium
+extract-elf	File Operations	Medium
+extract-moves-from-video	File Operations	Hard
+feal-differential-cryptanalysis	Mathematics	Hard
+feal-linear-cryptanalysis	Mathematics	Hard
+filter-js-from-html	Security	Medium
+financial-document-processor	Data Processing	Medium
+fix-code-vulnerability	Security	Hard
+fix-git	Software Engineering	Easy
+fix-ocaml-gc	Software Engineering	Hard
+gcode-to-text	File Operations	Medium
+git-leak-recovery	Software Engineering	Medium
+git-multibranch	System Administration	Medium
+gpt2-codegolf	Software Engineering	Hard
+headless-terminal	Software Engineering	Medium
+hf-model-inference	Data Science	Medium
+install-windows-3.11	System Administration	Hard
+kv-store-grpc	Software Engineering	Medium
+large-scale-text-editing	File Operations	Medium
+largest-eigenval	Mathematics	Medium
+llm-inference-batching-scheduler	Machine Learning	Hard
+log-summary-date-ranges	Data Processing	Medium
+mailman	System Administration	Medium
+make-doom-for-mips	Software Engineering	Hard
+make-mips-interpreter	Software Engineering	Hard
+mcmc-sampling-stan	Data Science	Hard
+merge-diff-arc-agi-task	Debugging	Medium
+model-extraction-relu-logits	Mathematics	Hard
+modernize-scientific-stack	Scientific Computing	Medium
+mteb-leaderboard	Data Science	Medium
+mteb-retrieve	Data Science	Medium
+multi-source-data-merger	Data Processing	Medium
+nginx-request-logging	System Administration	Medium
+openssl-selfsigned-cert	Security	Medium
+overfull-hbox	Debugging	Easy
+password-recovery	Security	Hard
+path-tracing	Software Engineering	Hard
+path-tracing-reverse	Software Engineering	Hard
+polyglot-c-py	Software Engineering	Medium
+polyglot-rust-c	Software Engineering	Hard
+portfolio-optimization	Optimization	Medium
+protein-assembly	Scientific Computing	Hard
+prove-plus-comm	Software Engineering	Easy
+pypi-server	Software Engineering	Medium
+pytorch-model-cli	Model Training	Medium
+pytorch-model-recovery	Model Training	Medium
+qemu-alpine-ssh	System Administration	Medium
+qemu-startup	System Administration	Medium
+query-optimize	Data Science	Medium
+raman-fitting	Scientific Computing	Medium
+regex-chess	Software Engineering	Hard
+regex-log	Data Processing	Medium
+reshard-c4-data	Data Science	Medium
+rstan-to-pystan	Data Science	Medium
+sam-cell-seg	Data Science	Hard
+sanitize-git-repo	Security	Medium
+schemelike-metacircular-eval	Software Engineering	Medium
+sparql-university	Data Querying	Hard
+sqlite-db-truncate	Debugging	Medium
+sqlite-with-gcov	System Administration	Medium
+torch-pipeline-parallelism	Software Engineering	Hard
+torch-tensor-parallelism	Software Engineering	Hard
+train-fasttext	Model Training	Hard
+tune-mjcf	Scientific Computing	Medium
+video-processing	Video Processing	Hard
+vulnerable-secret	Security	Medium
+winning-avg-corewars	Software Engineering	Medium
+write-compressor	Software Engineering	Hard
