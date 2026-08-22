@@ -1,0 +1,826 @@
+
+
+Key Concepts | laude-institute/terminal-bench | DeepWiki
+
+Loading...
+
+Index your code with Devin
+
+DeepWiki
+
+DeepWiki
+
+laude-institute/terminal-bench
+
+Index your code with
+
+Devin
+
+Edit Wiki
+
+Share
+
+Loading...
+
+Last indexed: 
+10 December 2025
+ (
+1b025c
+)
+
+Overview
+
+System Architecture
+
+Key Concepts
+
+Getting Started
+
+Installation and Setup
+
+Running Your First Benchmark
+
+Core Systems
+
+CLI Interface
+
+Execution Harness
+
+Terminal and Docker System
+
+LLM Integration
+
+Parser System
+
+Task System
+
+Task Structure and Components
+
+Creating Tasks
+
+Testing and Validation
+
+External Adapters
+
+Agent Framework
+
+Agent Architecture and Factory
+
+Built-in Agents
+
+Installed Agents
+
+MCP Agents
+
+Implementing Custom Agents
+
+Data Management
+
+Datasets and Registry
+
+Results Storage and Analysis
+
+Leaderboard Submission
+
+Quality Assurance
+
+Quality Checker
+
+Debug Checker
+
+CI/CD Workflows
+
+Reference
+
+CLI Command Reference
+
+Task Configuration Reference
+
+API Reference
+
+Troubleshooting
+
+Task Examples
+
+Mathematical and Algorithm Tasks
+
+System Administration Tasks
+
+Data Science and ML Tasks
+
+Security and Forensics Tasks
+
+Complex Environment Tasks
+
+Menu
+
+Key Concepts
+
+Relevant source files
+
+.gitignore
+
+README.md
+
+docker/agents/goose/docker-compose.yaml
+
+docker/mcp-server/docker-compose.yaml
+
+pyproject.toml
+
+tasks/home-server-https/docker-compose.yaml
+
+tasks/simple-web-scraper/docker-compose.yaml
+
+terminal_bench/cli/tb/cache.py
+
+terminal_bench/cli/tb/datasets.py
+
+terminal_bench/cli/tb/debug_checker/__init__.py
+
+terminal_bench/cli/tb/debug_checker/debug_analysis.txt
+
+terminal_bench/cli/tb/debug_checker/debug_checker.py
+
+terminal_bench/cli/tb/debug_checker/models.py
+
+terminal_bench/cli/tb/main.py
+
+terminal_bench/cli/tb/runs.py
+
+terminal_bench/cli/tb/tasks.py
+
+terminal_bench/dataset/dataset.py
+
+terminal_bench/handlers/trial_handler.py
+
+terminal_bench/harness/harness.py
+
+terminal_bench/terminal/docker_compose_manager.py
+
+terminal_bench/terminal/terminal.py
+
+terminal_bench/terminal/tmux_session.py
+
+uv.lock
+
+This page defines the core terminology and fundamental concepts used throughout Terminal-Bench. Understanding these concepts is essential for working with the benchmark, whether you're running evaluations, creating tasks, or developing custom agents.
+
+For detailed architecture information about how these components interact, see 
+System Architecture
+. For practical guidance on running benchmarks, see 
+Running Your First Benchmark
+.
+
+Tasks
+
+A 
+task
+ is the fundamental unit of evaluation in Terminal-Bench. Each task represents a self-contained challenge that an agent must solve in an isolated environment.
+
+Task Structure
+
+Every task consists of five required components:
+
+Component
+
+File
+
+Purpose
+
+Configuration
+
+task.yaml
+
+Task instruction, metadata, timeouts, parser configuration
+
+Environment
+
+docker-compose.yaml
+
+Container definitions and dependencies
+
+Oracle Solution
+
+solution.sh
+ or 
+solution.yaml
+
+Reference implementation for the task
+
+Tests
+
+tests/
+ directory
+
+Unit tests to validate task completion
+
+Test Runner
+
+run-tests.sh
+
+Script that executes tests and outputs results
+
+Sources:
+
+terminal_bench/handlers/trial_handler.py
+
+29-122
+
+terminal_bench/handlers/trial_handler.py
+
+124-170
+
+Task Class
+
+The 
+Task
+ class (
+
+terminal_bench/handlers/trial_handler.py
+
+29-122
+
+) defines the task schema with three categories of fields:
+
+Instruction:
+
+instruction
+ - Natural language description of what the agent must accomplish
+
+Metadata:
+
+author_name
+, 
+author_email
+ - Task authorship
+
+difficulty
+ - 
+TaskDifficulty
+ enum (easy/medium/hard)
+
+category
+ - High-level classification (e.g., "software_engineering")
+
+tags
+ - Detailed categorization
+
+Configuration:
+
+parser_name
+ - Which parser to use (
+ParserName
+ enum)
+
+max_agent_timeout_sec
+ - Time limit for agent execution (default: 360s)
+
+max_test_timeout_sec
+ - Time limit for test execution (default: 60s)
+
+run_tests_in_same_shell
+ - Whether tests share shell state with agent
+
+disable_asciinema
+ - Disable terminal recording while keeping Docker
+
+estimated_duration_sec
+ - Expected completion time for metrics
+
+Sources:
+
+terminal_bench/handlers/trial_handler.py
+
+29-97
+
+Agents
+
+An 
+agent
+ is a system that attempts to solve tasks by executing commands in the terminal environment. Agents receive the task instruction and terminal output, then generate commands to complete the task.
+
+Agent Interface
+
+All agents implement the 
+BaseAgent
+ interface:
+
+Sources:
+
+terminal_bench/agents/base_agent.py
+
+terminal_bench/agents/agent_factory.py
+
+AgentResult
+
+After execution, agents return an 
+AgentResult
+ containing:
+
+Field
+
+Type
+
+Description
+
+prompt_tokens
+
+int
+
+Tokens used in prompts
+
+completion_tokens
+
+int
+
+Tokens used in completions
+
+cached_tokens
+
+int
+
+Tokens served from cache
+
+asciinema_markers
+
+list[float]
+
+Timestamps of key events in recording
+
+error
+
+str | None
+
+Error message if agent failed
+
+Sources:
+
+terminal_bench/agents/base_agent.py
+
+Harness
+
+The 
+harness
+ is the orchestration engine that coordinates benchmark execution. The 
+Harness
+ class (
+
+terminal_bench/harness/harness.py
+
+56-883
+
+) manages:
+
+Dataset Loading
+ - Fetching tasks from registry or local path
+
+Environment Setup
+ - Spinning up Docker containers via 
+DockerComposeManager
+
+Agent Execution
+ - Creating and running agents via 
+AgentFactory
+
+Test Execution
+ - Running tests and parsing results
+
+Result Collection
+ - Aggregating metrics and writing outputs
+
+Sources:
+
+terminal_bench/harness/harness.py
+
+56-883
+
+Terminal and Tmux Sessions
+
+Terminal-Bench executes tasks in isolated Docker containers, with terminal interaction managed through tmux sessions.
+
+Terminal Abstraction
+
+The 
+Terminal
+ class (
+
+terminal_bench/terminal/terminal.py
+
+11-145
+
+) provides:
+
+Container Management
+ - Starts/stops Docker services via 
+DockerComposeManager
+
+Session Creation
+ - Creates 
+TmuxSession
+ instances for different purposes
+
+File Transfer
+ - Copies files into containers
+
+Livestreaming
+ - Optional real-time log streaming
+
+TmuxSession
+
+The 
+TmuxSession
+ class (
+
+terminal_bench/terminal/tmux_session.py
+
+14-409
+
+) provides the interface for terminal control:
+
+Sources:
+
+terminal_bench/terminal/tmux_session.py
+
+14-409
+
+Command Execution Modes
+
+Commands can be executed in two modes:
+
+Mode
+
+Behavior
+
+Use Case
+
+Non-blocking
+ (
+block=False
+)
+
+Returns after 
+min_timeout_sec
+
+Quick commands, interactive prompts
+
+Blocking
+ (
+block=True
+)
+
+Waits until command completion signal
+
+Long-running operations, ensures completion
+
+Blocking mode works by appending 
+; tmux wait -S done
+ to commands and waiting for the tmux signal.
+
+Sources:
+
+terminal_bench/terminal/tmux_session.py
+
+206-295
+
+Trials
+
+A 
+trial
+ represents a single execution attempt of a task by an agent. When 
+n_attempts > 1
+, a task generates multiple independent trials.
+
+Trial Structure
+
+Sources:
+
+terminal_bench/handlers/trial_handler.py
+
+172-236
+
+terminal_bench/handlers/trial_handler.py
+
+238-275
+
+TrialResults
+
+The 
+TrialResults
+ model (
+
+terminal_bench/harness/models.py
+
+) contains:
+
+Field
+
+Type
+
+Description
+
+task_id
+
+str
+
+Unique task identifier
+
+trial_name
+
+str
+
+Trial identifier (e.g., "trial_1")
+
+is_resolved
+
+bool
+
+Whether all tests passed
+
+parser_results
+
+dict[str, UnitTestStatus]
+
+Per-test outcomes
+
+failure_mode
+
+FailureMode
+
+Reason for failure if not resolved
+
+prompt_tokens
+
+int
+
+Tokens from agent
+
+completion_tokens
+
+int
+
+Tokens from agent
+
+cached_tokens
+
+int
+
+Cached tokens from agent
+
+agent_duration_sec
+
+float
+
+Agent execution time
+
+test_duration_sec
+
+float
+
+Test execution time
+
+Sources:
+
+terminal_bench/harness/models.py
+
+Datasets
+
+A 
+dataset
+ is a versioned collection of tasks. Datasets enable reproducible benchmarking and leaderboard comparisons.
+
+Dataset Loading
+
+The 
+Dataset
+ class (
+
+terminal_bench/dataset/dataset.py
+
+49-252
+
+) supports two loading modes:
+
+Registry-based:
+
+Local path:
+
+Dataset Filtering
+
+Datasets can be filtered using:
+
+Parameter
+
+Description
+
+Example
+
+task_ids
+
+List of task IDs or glob patterns
+
+["task_*", "web-scraper"]
+
+n_tasks
+
+Limit to first N tasks
+
+10
+
+exclude_task_ids
+
+Task IDs or patterns to exclude
+
+["flaky_*"]
+
+Sources:
+
+terminal_bench/dataset/dataset.py
+
+49-252
+
+Registry System
+
+The registry system provides versioned dataset distribution:
+
+Sources:
+
+terminal_bench/registry/client.py
+
+terminal_bench/registry/models.py
+
+Parsers
+
+Parsers
+ interpret test execution output and convert it into structured results. The system uses a factory pattern to support multiple test frameworks.
+
+Parser Types
+
+Sources:
+
+terminal_bench/parsers/parser_factory.py
+
+terminal_bench/parsers/base_parser.py
+
+Parser Output
+
+Parsers return a dictionary mapping test names to status:
+
+A task is considered 
+resolved
+ when all tests return 
+UnitTestStatus.PASSED
+.
+
+Sources:
+
+terminal_bench/harness/harness.py
+
+536-543
+
+Failure Modes
+
+When a task is not resolved, a 
+failure mode
+ categorizes why it failed. This distinction helps separate task quality issues from agent limitations.
+
+FailureMode Taxonomy
+
+Sources:
+
+terminal_bench/harness/models.py
+
+terminal_bench/harness/harness.py
+
+705-794
+
+Failure Mode Determination
+
+The harness determines failure mode through exception handling and test result analysis:
+
+Agent Execution
+ - Catches timeout, context length, and agent errors
+
+Test Execution
+ - Catches timeout errors
+
+Result Analysis
+ - Examines parser results for test failures
+
+Default
+ - 
+FailureMode.NONE
+ if all tests pass
+
+Sources:
+
+terminal_bench/harness/harness.py
+
+705-794
+
+Run Metadata and Reproducibility
+
+Terminal-Bench ensures reproducibility through the 
+RunLock
+ system.
+
+Run Lock (tb.lock)
+
+Every run creates a 
+tb.lock
+ file capturing:
+
+Sources:
+
+terminal_bench/utils/run_lock.py
+
+Resuming Runs
+
+The harness can resume incomplete runs:
+
+Reads 
+tb.lock
+ to validate configuration matches
+
+Checks each task for complete trial results
+
+Cleans up incomplete trial artifacts
+
+Re-runs only incomplete tasks
+
+This enables long-running evaluations to recover from interruptions without re-executing completed work.
+
+Sources:
+
+terminal_bench/harness/harness.py
+
+200-248
+
+terminal_bench/harness/harness.py
+
+296-383
+
+Dismiss
+
+Refresh this wiki
+
+Enter email to refresh
+
+On this page
+
+Key Concepts
+
+Tasks
+
+Task Structure
+
+Task Class
+
+Agents
+
+Agent Interface
+
+AgentResult
+
+Harness
+
+Terminal and Tmux Sessions
+
+Terminal Abstraction
+
+TmuxSession
+
+Command Execution Modes
+
+Trials
+
+Trial Structure
+
+TrialResults
+
+Datasets
+
+Dataset Loading
+
+Dataset Filtering
+
+Registry System
+
+Parsers
+
+Parser Types
+
+Parser Output
+
+Failure Modes
+
+FailureMode Taxonomy
+
+Failure Mode Determination
+
+Run Metadata and Reproducibility
+
+Run Lock (tb.lock)
+
+Resuming Runs
+
