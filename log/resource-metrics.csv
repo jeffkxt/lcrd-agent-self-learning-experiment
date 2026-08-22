@@ -1,0 +1,2 @@
+﻿experiment_id,model_name,framework,task_name,wall_time_min,tool_call_total_min,avg_first_token_latency_sec,total_output_tokens,input_context_tokens,interrupt_count,experiment_date
+exp‑tb21‑001,DeepSeek‑V4‑Flash‑0731,LCRD‑Agent Goal‑Stop‑Marker,Terminal‑Bench 2.1 autonomous research,89,128.8,39,144000,8192,2,2026‑08‑22
