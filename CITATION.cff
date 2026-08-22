@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this experimental trace dataset, please cite this repository."
+authors:
+  - family-names: Feng
+    given-names: Jeff
+    email: jeffkxt@gmail.com
+title: "LCRD‑Agent Self‑Learning Experiment: Terminal‑Bench 2.1 Research Trace"
+date-released: "2026‑08‑22"
+license: MIT
+url: https://github.com/jeffkxt/lcrd-agent-self-learning-experiment

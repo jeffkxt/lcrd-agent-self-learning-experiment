@@ -85,6 +85,11 @@ Marker：输出结构化完整报告，单独小节放置自制 3 条测试用�
 - DeepSeek-V4-Flash-0731 模型卡（Together AI）：https://www.together.ai/models/deepseek-v4-flash-0731
 - Terminal-Bench 2.1 官方新闻（28 任务修复口径）：https://www.tbench.ai/news/terminal-bench-2-1
 
+## Contact
+If you are interested in LCRD‑Agent framework, autonomous‑agent long‑chain experiment, want to discuss or give feedback, feel free to contact me:
+**jeffkxt@gmail.com**
+
 ## License
 本目录下轨迹报告文档采用 MIT 协议；
-> ⚠️：`tb_sources/` 内原始抓取内容版权归原作者所有，请遵守原项目开源协议。请确认 `tb_sources/` 内未包含需登录方可访问的内容；若含 Terminal-Bench 官方仓库完整任务文件，请另行核对官方仓库 LICENSE 是否允许再分发。
+
+⚠️：`tb_sources/` 内原始抓取内容版权归原作者所有，请遵守原项目开源协议。请确认 `tb_sources/` 内未包含需登录方可访问的内容；若含 Terminal‑Bench 官方仓库完整任务文件，请另行核对官方仓库 LICENSE 是否允许再分发。
