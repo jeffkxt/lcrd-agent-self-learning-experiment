@@ -40,7 +40,11 @@ Marker：输出结构化完整报告，单独小节放置自制 3 条测试用�
 ├── Terminal-Bench-2.1-深度笔记.md          # 一手资料深度笔记，大量原文摘抄与来源标注
 ├── tbench21_compare_report.md             # Claude Opus4.8 / GLM-5.2 / DeepSeek-V4-Flash-0731 TB2.1 跑分对比
 ├── tb21_thirdparty_report.md              # 第三方评测数据源取证报告，区分官方 / 第三方，标注取证限制
+├── CITATION.cff
+├── License
+├── log/
 └── tb_sources/                            # 原始抓取网页、仓库、论文片段（证据链，用于复核报告内容）
+
 ```
 
 > 💡 文件名说明：本目录早期版本部分文件名含空格（如 `Terminal-Bench-2.1 - 调研报告.md`），已在本地整理版中统一改为连字符命名（如上所示），避免命令行与脚本引用时出错。
